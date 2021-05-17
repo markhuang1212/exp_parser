@@ -3,14 +3,6 @@
 #include <ctype.h>
 #include <string.h>
 #include <stdlib.h>
-
-#ifdef __linux
-#include <error.h>
-#elif __APPLE__
-#include <mach/error.h>
-#endif
-
-#include <errno.h>
 #include <readline/readline.h>
 
 #define BUFF_SIZE 16384
@@ -205,12 +197,9 @@ int parseExp(double *result)
 int main()
 {
     int ret;
-    // buff = (char *)malloc(sizeof(char) * BUFF_SIZE);
-    // size_t LIMIT_SIZE = BUFF_SIZE;
 
     while (1)
     {
-        // ret = getline(&buff, &LIMIT_SIZE, stdin);
         buff = readline("Input: ");
         pos = strlen(buff) - 1;
 
@@ -218,9 +207,7 @@ int main()
         ret = parseExp(&result);
 
         if (ret == -1)
-        {
             return 1;
-        }
 
         printf("result: %lf \n", result);
 
