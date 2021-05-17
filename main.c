@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <error.h>
 #include <errno.h>
+#include <readline/readline.h>
 
 #define BUFF_SIZE 16384
 
@@ -200,21 +201,14 @@ int parseExp(double *result)
 int main()
 {
     int ret;
-    buff = (char *)malloc(sizeof(char) * BUFF_SIZE);
-    size_t LIMIT_SIZE = BUFF_SIZE;
+    // buff = (char *)malloc(sizeof(char) * BUFF_SIZE);
+    // size_t LIMIT_SIZE = BUFF_SIZE;
 
     while (1)
     {
-        ret = getline(&buff, &LIMIT_SIZE, stdin);
-
-        if (ret == -1)
-        {
-            printf("Readline Error\n");
-            printf("%s \n", strerror(errno));
-            return 1;
-        }
-
-        pos = ret - 1;
+        // ret = getline(&buff, &LIMIT_SIZE, stdin);
+        buff = readline("Input: ");
+        pos = strlen(buff) - 1;
 
         double result;
         ret = parseExp(&result);
@@ -226,7 +220,7 @@ int main()
 
         printf("result: %lf \n", result);
 
-        memset(buff, 0, BUFF_SIZE);
+        free(buff);
     }
 
     return 0;
