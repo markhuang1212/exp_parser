@@ -5,8 +5,6 @@
 #include <stdlib.h>
 #include <readline/readline.h>
 
-#define BUFF_SIZE 16384
-
 char *buff = NULL;
 int pos = 0;
 int pos_max = 0;
