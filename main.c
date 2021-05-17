@@ -1,11 +1,15 @@
-#define _GNU_SOURCE
-
 #include <unistd.h>
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
 #include <stdlib.h>
+
+#ifdef __linux
 #include <error.h>
+#elif __APPLE__
+#include <mach/error.h>
+#endif
+
 #include <errno.h>
 #include <readline/readline.h>
 
